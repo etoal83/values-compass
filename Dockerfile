@@ -2,6 +2,7 @@ FROM ruby:2.6.5
 RUN apt update -qq && apt install --no-install-recommends -y build-essential nodejs yarn postgresql-client vim
 RUN mkdir /src
 WORKDIR /src
+
 COPY Gemfile /src/Gemfile
 COPY Gemfile.lock /src/Gemfile.lock
 RUN bundle install
@@ -12,6 +13,9 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
+
+RUN useradd -m --shell /bin/bash --uid 1000 ruby
+USER ruby
 
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
