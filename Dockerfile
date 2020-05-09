@@ -16,6 +16,7 @@ EXPOSE 3000
 
 RUN useradd -m --shell /bin/bash --uid 1000 ruby
 USER ruby
+ENV EDITOR vim
 
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
