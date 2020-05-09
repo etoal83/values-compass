@@ -7,7 +7,7 @@ build:
     web: Dockerfile
 release:
   command:
-    - bin/rails db:migrate
+    - bundle exec rails db:migrate
   image: web
 run:
   web: mkdir -p tmp/pids && bundle exec puma -C config/puma.rb
