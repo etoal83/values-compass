@@ -4,4 +4,10 @@ setup:
       as: DATABASE
 build:
   docker:
-    app: Dockerfile
+    web: Dockerfile
+release:
+  image: web
+  command: bin/rails db:migrate
+run:
+  web: bundle exec puma -C config/puma.rb
+  
